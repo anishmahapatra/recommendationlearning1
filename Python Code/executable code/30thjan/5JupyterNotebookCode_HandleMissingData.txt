@@ -1,0 +1,78 @@
+#############################
+
+import pandas as pd
+df = pd.read_csv("weather_data.csv")
+df
+type(df.day[0])
+#code to change the type "text" generally used in csv to type "date" by parsing
+df = pd.read_csv("weather_data.csv", parse_dates=["day"])
+type(df.day[0])
+df
+
+############################# Code to change and set the index of the csv
+
+df.set_index('day', inplace=True) #incplce is important here
+df
+
+############################# Code to fill 0 directly in the values that have NaN
+
+new_df = df.fillna(0)
+new_df
+
+############################# Forward Fill/ Backward Fill vertically
+
+new_df = df.fillna(method="ffill")
+new_df
+new_df = df.fillna(method="bfill")
+new_df
+
+#############################
+
+#Used to do backfilling horizontally, instead of vertically
+new_df = df.fillna(method="bfill", axis="columns")
+new_df
+
+#Code is used to do ffill or bfill with the limit=1
+new_df = df.fillna(method="ffill", limit=1)
+new_df
+
+#Code used to interpolate values in between (linear interpolation by default)
+new_df = df.interpolate()
+new_df
+
+#############################
+
+#Code used to used interpolate with time as the decided method of interpolation
+new_df = df.interpolate(method="time")
+new_df
+#Google "pandas.DatFrame.interpolate" for documentation on interpolate
+
+#############################
+
+#Drop all the tuple that have NaN in them
+new_df = df.dropna()
+new_df
+
+#############################
+
+#How to insert missing date
+dt = pd.date_range("01-01-2017","01-11-2017")
+idx = pd.DatetimeIndex(dt)
+df.reindex(idx)
+
+#############################
+
+#Code used to keep the row, if atleast one value is non-NaN. So, we are deciding the threshold
+new_df = df.dropna(thresh=1)
+new_df
+
+#############################
+
+
+#Drop all the tuples that have NaN in all of the columns
+new_df = df.dropna(how="all")
+new_df
+
+#############################
+
+

@@ -1,0 +1,37 @@
+####################################
+
+import pandas as pd
+df = pd.read_csv("weather_by_cities.csv")
+df
+
+####################################
+
+#Code used to group the csv with the mentioned column. The group by function creates this thing called DataFrame Group Object which consists of the datadrame of that particular value as the second value in the dataframe group object we have creater. (Here it is 'g')
+g = df.groupby('city')
+g
+
+####################################
+
+#Code prints the city and the corresponding data frane from the DataFrame Group object.
+for city, city_df in g:
+    print(city)
+    print(city_df)
+
+####################################
+
+#Code prints the DataFrame object of a particular city from the DataFrame Group object
+g.get_group('mumbai')
+#Same as 'SELECT * from city_data GROUP BY city' 
+
+####################################
+
+#Code to find the max temperature from each of these cities from the DataFrame Group Object
+g.max()
+#This method of being able to aply analytics individually and viewing it in the same frame is the technique aka Split-Apply-Combine
+
+####################################
+
+%matplotlib inline
+g.plot()
+
+####################################

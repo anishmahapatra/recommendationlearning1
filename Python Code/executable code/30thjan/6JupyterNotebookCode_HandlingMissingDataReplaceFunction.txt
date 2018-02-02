@@ -1,0 +1,71 @@
+#####################################
+
+import pandas as pd
+import numpy as np
+df = pd.read_csv('weather_data2.csv')
+df
+
+#####################################
+
+#Code is used to replace special values '-99999' with NaN
+new_df = df.replace(-99999, np.NaN)
+new_df
+
+#####################################
+
+#Now, suppose you have 2 special avlues, say '-99999' and '-88888', we use a list in python to substitiute the values with NaN
+new_df = df.replace([-99999,-88888],np.NaN)
+new_df
+
+#####################################
+
+#We can specifically replace NaN values
+new_df = df.replace({
+    'temperature': -99999,
+    'windspeed': -99999,
+    'event': '0'
+},np.NaN)
+new_df
+
+#####################################
+
+#Code to replace with specific value from csv with a specified value
+new_df = df.replace({
+    -99999: np.NaN,
+    '0':'Sunny'    
+})
+new_df
+
+#####################################
+
+#Using Regex to remove unscrupulous statements from the csv
+new_df = df.replace('[A-Za-z]','',regex=True)
+new_df
+#wrong reslt as it wiped out one of our columns entirely
+#https://www.youtube.com/watch?v=XOxABiMhG2U
+
+#####################################
+
+#We shall use a pyton dictionary to specify rules for each column
+new_df = df.replace({
+    'temperature': '[A-Za-z]',
+    'windspeed': '[A-Za-z]'
+},'',regex=True)
+new_df
+
+#####################################
+
+df = pd.DataFrame({
+    'score': ['exceptional','average', 'good', 'poor', 'average', 'exceptional'],
+    'student': ['rob', 'maya', 'parthiv', 'tom', 'julian', 'erica']
+})
+df
+
+#####################################
+
+#Code is used to replace one value (generally categorical) with a numberical value to simplify claculations
+new_df = df.replace(['poor','average','good','exceptional'],[1,2,3,4])
+new_df
+
+#####################################
+

@@ -1,0 +1,80 @@
+#One hot encoding
+'''
+If you have categorical data, you can create dummy variables with 0/1 values for each possible value.
+
+E. g.
+
+idx color
+0   blue
+1   green
+2   green
+3   red
+to
+
+idx blue green red
+0   1    0     0
+1   0    1     0
+2   0    1     0
+3   0    0     1
+This can easily be done with pandas:
+'''
+
+import pandas as pd
+
+data = pd.DataFrame({'color': ['blue', 'green', 'green', 'red']})
+print(pd.get_dummies(data))
+'''
+will result in:
+
+   color_blue  color_green  color_red
+0           1            0          0
+1           0            1          0
+2           0            1          0
+3           0            0          1
+'''
+'''
+Numbers for ordinal data
+Create a mapping of your sortable categories, e. g. old < renovated < new → 0, 1, 2
+
+This is also possible with pandas:
+'''
+
+data = pd.DataFrame({'q': ['old', 'new', 'new', 'ren']})
+data['q'] = data['q'].astype('category')
+data['q'] = data['q'].cat.reorder_categories(['old', 'ren', 'new'], ordered=True)
+data['q'] = data['q'].cat.codes
+print(data['q'])
+
+'''
+Result:
+
+0    0
+1    2
+2    2
+3    1
+Name: q, dtype: int8
+
+Using categorical data for groupby operations
+You could use the mean for each category over past (known events).
+
+Say you have a DataFrame with the last known mean prices for cities:
+'''
+prices = pd.DataFrame({
+    'city': ['A', 'A', 'A', 'B', 'B', 'C'],
+    'price': [1, 1, 1, 2, 2, 3],
+})
+mean_price = prices.groupby('city').mean()
+data = pd.DataFrame({'city': ['A', 'B', 'C', 'A', 'B', 'A']})
+
+print(data.merge(mean_price, on='city', how='left'))
+'''
+Result:
+
+  city  price
+0    A      1
+1    B      2
+2    C      3
+3    A      1
+4    B      2
+5    A      1
+'''

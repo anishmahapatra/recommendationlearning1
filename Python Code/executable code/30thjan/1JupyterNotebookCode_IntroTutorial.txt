@@ -1,0 +1,25 @@
+#################################################### Code to use pandas to load csv in python (Jupyter Notebook)
+
+import pandas as pd
+df = pd.read_csv("E:\\CrewKarma\\actualdata\\JobData\\30thJan2018\\jdtry2.csv")
+df
+
+################################################### Code to find the maximum compensation offered by a compny in the jobdata set we are analyzing
+
+df['maxcompensation'].max()
+
+################################################### Code to output the Title of the jobs that have mentioned their maxcompensation
+
+df['Title'][df['maxcompensation']>0]
+
+################################################### Code to take average of a particular value
+
+df['mincompensation'].mean()
+
+###################################################  Code to replace NaN with 0
+
+import pandas as pd
+df1 = pd.read_csv("E:\\CrewKarma\\actualdata\\JobData\\30thJan2018\\job_data.csv")
+df1
+df1.fillna(0, inplace=True)
+df1

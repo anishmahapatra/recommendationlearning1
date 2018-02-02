@@ -1,0 +1,55 @@
+############################ Code used to import pandas and the required csv
+
+import pandas as pd
+df = pd.read_csv("E:\\CrewKarma\\repository\\ckrepo\\src\\background_jobs\\python\\crewkarma\\datascience\\weather_data.csv")
+df
+
+############################ Code to get the general shape of the data
+
+rows, columns = df.shape
+rows
+columns
+
+############################ Code used to print the head and tail of the data
+
+df.head()
+df.head(2)
+df.tail(1)
+
+############################ When we splice data, the first number 'a' is included and the second number 'b' is not in df[a:b]
+
+df[2:5] 	#rows from 2 to 4
+df[:]   	#prints everything
+df			#prints everything
+df.columns 	#prints the names of the columns
+df.<rowname> #prints the elements fo the row 
+#say, event is the name of the column,
+df.event #is the same as
+df['event']
+
+############################ Code to find the the type of data you are dealing with
+
+type(df['event']) #All the data we deal with are of the type data series
+event[['event','day']] #To print particular columns
+
+############################ Code to have fun with your data #max
+
+df['temperature'].max()
+df['temperature'].min()
+df['temperature'].mean()
+df['temperature'].std()			#standard deviation
+df.describe()						#all details about the data - count, mean, std, min, 25%, 50%, 75%, max
+
+############################
+
+df[df,temperature>=32]						#rows where temperature was equal to or greater than 32
+df[df.temperature==df.temperature.max()]	#rows which has df.temperature as maximum
+df[df.temperature==df['temperature'].max()] #same as one above BUT this syntax is to be used of the columm name has spaces
+
+############################
+
+############################
+
+############################
+
+############################

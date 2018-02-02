@@ -1,0 +1,99 @@
+####################################
+
+import pandas as pd
+df = pd.read_csv("stock_data.csv")
+df
+
+#in case you have random values in the first row or you have the sheet's heading or something
+df = pd.read_csv("stock_data1.csv", skiprows=1 )	
+df
+
+#sameas above
+df = pd.read_csv("stock_data1.csv", header=1 )
+df
+
+#When you do not wish to include headers
+df = pd.read_csv("stock_data1.csv", header=None )
+df
+
+#When you want to specify the column rows on your own
+df = pd.read_csv("stock_data1.csv", header=None, names=["tickr","eps","revenue","price","people"] )
+
+#When you want to print the top 3 rows
+df = pd.read_csv("stock_data1.csv", nrows=3)
+df
+
+#How to replace random unecessary values with NaN (Not a number)
+df = pd.read_csv("stock_data1.csv", na_values=["not available","n.a."])
+df
+
+#################################### When you want to specify very specifically how every single column should handle missing/ na data and even things like -1
+
+df = pd.read_csv("stock_data1.csv", na_values={
+    'eps': ["not available","na"],
+    'revenue': ["not available","na", -1],
+    'people': ["not available","na"]
+})
+df
+
+#################################### 
+
+df.to_csv('new.csv')
+df.to_csv('new.csv', index=False)
+#Shen you want to print/ output 2 specific columns
+df.to_csv(["new.csv",columns=['tickers','eps']])
+
+df.columns
+df.to_csv("new1.csv",columns=['tickers','eps'])
+df.to_csv("new2.csv",header=False)
+
+#################################### EXCEL FILE
+
+df = pd.read_excel("stock_data.xlsx")
+df
+
+####################################
+
+def convert_people_cell(cell):
+    if cell=="n.a.":
+            return 'sam walton'
+    return cell
+def convert_eps_cell(cell):
+    if cell=="not available":
+            return None
+    return cell
+
+df=pd.read_excel("stock_data.xlsx", "Sheet1", converters = {
+    'people':convert_people_cell,
+    'eps': convert_eps_cell
+})
+df
+
+####################################
+
+df.to_excel("new3.xlsx",sheet_name="stocks")
+df.to_excel("new3.xlsx",sheet_name="stocks", startrow=1, startcol=2,index=False)
+
+####################################
+
+df_stocks = pd.DataFrame({
+    'tickers': ['GOOGL', 'WMT', 'MSFT'],
+    'price': [845, 65, 64 ],
+    'pe': [30.37, 14.26, 30.97],
+    'eps': [27.82, 4.61, 2.12]
+})
+
+df_weather =  pd.DataFrame({
+    'day': ['1/1/2017','1/2/2017','1/3/2017'],
+    'temperature': [32,35,28],
+    'event': ['Rain', 'Sunny', 'Snow']
+})
+
+#################################### To write from 2 dataframes into one excel sheet using Excel Writer
+
+with pd.ExcelWriter('stocks_weather.xlsx') as writer:
+    df_stocks.to_excel(writer, sheet_name="stocks")
+    df_weather.to_excel(writer, sheet_name ="weather")
+
+####################################
+
