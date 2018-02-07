@@ -1,3 +1,8 @@
+#http://pbpython.com/categorical-encoding.html
+
+#https://www.analyticsvidhya.com/blog/2015/11/easy-methods-deal-categorical-variables-predictive-modeling/
+
+
 #One hot encoding
 '''
 If you have categorical data, you can create dummy variables with 0/1 values for each possible value.
@@ -32,6 +37,8 @@ will result in:
 2           0            1          0
 3           0            0          1
 '''
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 '''
 Numbers for ordinal data
 Create a mapping of your sortable categories, e. g. old < renovated < new → 0, 1, 2
@@ -53,7 +60,9 @@ Result:
 2    2
 3    1
 Name: q, dtype: int8
-
+'''
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'''
 Using categorical data for groupby operations
 You could use the mean for each category over past (known events).
 
@@ -78,3 +87,4 @@ Result:
 4    B      2
 5    A      1
 '''
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
