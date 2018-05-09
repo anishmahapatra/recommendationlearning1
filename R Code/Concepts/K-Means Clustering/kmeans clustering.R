@@ -14,3 +14,5 @@ plot(iris[c("Petal.Length", "Petal.Width")], col = results$cluster)
 #Actual with Petal
 plot(iris[c("Petal.Length", "Petal.Width")], col = iris$Species)
 
+
+

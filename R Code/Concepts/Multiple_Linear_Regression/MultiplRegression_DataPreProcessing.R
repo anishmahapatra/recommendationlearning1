@@ -9,7 +9,8 @@ dataset = read.csv("50_Startups.csv")
 
 #Splitting the dataset into Training and Test Set
 # install.packages('caTools')
-library(csTools)
+library(csTools) #caTools
+
 set.seed(123)
 split = sample.split(dataset$Purchased, SplitRatio = 0.8)
 training_set = subset(dataset, split == TRUE)

@@ -24,3 +24,4 @@ length(data1)
 #kNN imputation
 install.packages("VIM")
 library("VIM")
+
